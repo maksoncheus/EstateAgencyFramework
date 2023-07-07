@@ -1,0 +1,870 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище EstateAgencyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Authorization">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="UserID" Type="int" />
+          <Property Name="Login" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommonContract">
+          <Key>
+            <PropertyRef Name="CommonContractID" />
+          </Key>
+          <Property Name="CommonContractID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Acquirer" Type="int" />
+          <Property Name="Seller" Type="int" />
+          <Property Name="DealType" Type="int" />
+          <Property Name="ContractDate" Type="date" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="Realty" Type="int" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="DealType">
+          <Key>
+            <PropertyRef Name="DealTypeID" />
+          </Key>
+          <Property Name="DealTypeID" Type="int" Nullable="false" />
+          <Property Name="DealTypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="PropertyID" />
+          </Key>
+          <Property Name="PropertyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameOfProperty" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Realty">
+          <Key>
+            <PropertyRef Name="RealtyID" />
+          </Key>
+          <Property Name="RealtyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="House" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Flat" Type="int" />
+          <Property Name="Disctrict" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Street" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Rooms" Type="int" />
+          <Property Name="LivingArea" Type="int" Nullable="false" />
+          <Property Name="City" Type="int" Nullable="false" />
+          <Property Name="Country" Type="int" Nullable="false" />
+          <Property Name="Floors" Type="int" />
+          <Property Name="Balcony" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="RealtyType" Type="int" />
+        </EntityType>
+        <EntityType Name="RealtyCharacteristic">
+          <Key>
+            <PropertyRef Name="RealtyCharacteristicID" />
+          </Key>
+          <Property Name="RealtyCharacteristicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Realty" Type="int" />
+          <Property Name="Property" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="ServiceContract">
+          <Key>
+            <PropertyRef Name="ServiceContractID" />
+          </Key>
+          <Property Name="ServiceContractID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Client" Type="int" />
+          <Property Name="Employee" Type="int" />
+          <Property Name="DealType" Type="int" />
+          <Property Name="ContractDate" Type="date" Nullable="false" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="char" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="TypeOfRealty">
+          <Key>
+            <PropertyRef Name="RealtyTypeID" />
+          </Key>
+          <Property Name="RealtyTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Firstname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lastname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Middle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telephone" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="Role" Type="int" />
+        </EntityType>
+        <Association Name="FK__Authoriza__UserI__5812160E">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Authorization" Type="Self.Authorization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Authorization">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommonCon__Acqui__5165187F">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="CommonContract" Type="Self.CommonContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CommonContract">
+              <PropertyRef Name="Acquirer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommonCon__DealT__534D60F1">
+          <End Role="DealType" Type="Self.DealType" Multiplicity="0..1" />
+          <End Role="CommonContract" Type="Self.CommonContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealType">
+              <PropertyRef Name="DealTypeID" />
+            </Principal>
+            <Dependent Role="CommonContract">
+              <PropertyRef Name="DealType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommonCon__Realt__5441852A">
+          <End Role="Realty" Type="Self.Realty" Multiplicity="0..1" />
+          <End Role="CommonContract" Type="Self.CommonContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realty">
+              <PropertyRef Name="RealtyID" />
+            </Principal>
+            <Dependent Role="CommonContract">
+              <PropertyRef Name="Realty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommonCon__Selle__52593CB8">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="CommonContract" Type="Self.CommonContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CommonContract">
+              <PropertyRef Name="Seller" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommonCon__Statu__5535A963">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="CommonContract" Type="Self.CommonContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="CommonContract">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Realty__RealtyTy__3E52440B">
+          <End Role="TypeOfRealty" Type="Self.TypeOfRealty" Multiplicity="0..1" />
+          <End Role="Realty" Type="Self.Realty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfRealty">
+              <PropertyRef Name="RealtyTypeID" />
+            </Principal>
+            <Dependent Role="Realty">
+              <PropertyRef Name="RealtyType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RealtyCha__Prope__440B1D61">
+          <End Role="Property" Type="Self.Property" Multiplicity="0..1" />
+          <End Role="RealtyCharacteristic" Type="Self.RealtyCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropertyID" />
+            </Principal>
+            <Dependent Role="RealtyCharacteristic">
+              <PropertyRef Name="Property" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RealtyCha__Realt__4316F928">
+          <End Role="Realty" Type="Self.Realty" Multiplicity="0..1" />
+          <End Role="RealtyCharacteristic" Type="Self.RealtyCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realty">
+              <PropertyRef Name="RealtyID" />
+            </Principal>
+            <Dependent Role="RealtyCharacteristic">
+              <PropertyRef Name="Realty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__Clien__4AB81AF0">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ServiceContract">
+              <PropertyRef Name="Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__DealT__4D94879B">
+          <End Role="DealType" Type="Self.DealType" Multiplicity="0..1" />
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealType">
+              <PropertyRef Name="DealTypeID" />
+            </Principal>
+            <Dependent Role="ServiceContract">
+              <PropertyRef Name="DealType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__Emplo__4BAC3F29">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ServiceContract">
+              <PropertyRef Name="Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__Statu__4E88ABD4">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="ServiceContract">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__Role__398D8EEE">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище EstateAgencyModelContainer">
+          <EntitySet Name="Authorization" EntityType="Self.Authorization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommonContract" EntityType="Self.CommonContract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DealType" EntityType="Self.DealType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Property" EntityType="Self.Property" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Realty" EntityType="Self.Realty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RealtyCharacteristic" EntityType="Self.RealtyCharacteristic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceContract" EntityType="Self.ServiceContract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfRealty" EntityType="Self.TypeOfRealty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Authoriza__UserI__5812160E" Association="Self.FK__Authoriza__UserI__5812160E">
+            <End Role="User" EntitySet="User" />
+            <End Role="Authorization" EntitySet="Authorization" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommonCon__Acqui__5165187F" Association="Self.FK__CommonCon__Acqui__5165187F">
+            <End Role="User" EntitySet="User" />
+            <End Role="CommonContract" EntitySet="CommonContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommonCon__DealT__534D60F1" Association="Self.FK__CommonCon__DealT__534D60F1">
+            <End Role="DealType" EntitySet="DealType" />
+            <End Role="CommonContract" EntitySet="CommonContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommonCon__Realt__5441852A" Association="Self.FK__CommonCon__Realt__5441852A">
+            <End Role="Realty" EntitySet="Realty" />
+            <End Role="CommonContract" EntitySet="CommonContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommonCon__Selle__52593CB8" Association="Self.FK__CommonCon__Selle__52593CB8">
+            <End Role="User" EntitySet="User" />
+            <End Role="CommonContract" EntitySet="CommonContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommonCon__Statu__5535A963" Association="Self.FK__CommonCon__Statu__5535A963">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="CommonContract" EntitySet="CommonContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Realty__RealtyTy__3E52440B" Association="Self.FK__Realty__RealtyTy__3E52440B">
+            <End Role="TypeOfRealty" EntitySet="TypeOfRealty" />
+            <End Role="Realty" EntitySet="Realty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RealtyCha__Prope__440B1D61" Association="Self.FK__RealtyCha__Prope__440B1D61">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="RealtyCharacteristic" EntitySet="RealtyCharacteristic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RealtyCha__Realt__4316F928" Association="Self.FK__RealtyCha__Realt__4316F928">
+            <End Role="Realty" EntitySet="Realty" />
+            <End Role="RealtyCharacteristic" EntitySet="RealtyCharacteristic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__Clien__4AB81AF0" Association="Self.FK__ServiceCo__Clien__4AB81AF0">
+            <End Role="User" EntitySet="User" />
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__DealT__4D94879B" Association="Self.FK__ServiceCo__DealT__4D94879B">
+            <End Role="DealType" EntitySet="DealType" />
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__Emplo__4BAC3F29" Association="Self.FK__ServiceCo__Emplo__4BAC3F29">
+            <End Role="User" EntitySet="User" />
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__Statu__4E88ABD4" Association="Self.FK__ServiceCo__Statu__4E88ABD4">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__Role__398D8EEE" Association="Self.FK__User__Role__398D8EEE">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EstateAgencyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Authorization">
+          <Key>
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Authoriza__UserI__5812160E" FromRole="Authorization" ToRole="User" />
+        </EntityType>
+        <EntityType Name="CommonContract">
+          <Key>
+            <PropertyRef Name="CommonContractID" />
+          </Key>
+          <Property Name="CommonContractID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Acquirer" Type="Int32" />
+          <Property Name="Seller" Type="Int32" />
+          <Property Name="DealType" Type="Int32" />
+          <Property Name="ContractDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="Realty" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK__CommonCon__Acqui__5165187F" FromRole="CommonContract" ToRole="User" />
+          <NavigationProperty Name="DealType1" Relationship="Self.FK__CommonCon__DealT__534D60F1" FromRole="CommonContract" ToRole="DealType" />
+          <NavigationProperty Name="Realty1" Relationship="Self.FK__CommonCon__Realt__5441852A" FromRole="CommonContract" ToRole="Realty" />
+          <NavigationProperty Name="User1" Relationship="Self.FK__CommonCon__Selle__52593CB8" FromRole="CommonContract" ToRole="User" />
+          <NavigationProperty Name="Status1" Relationship="Self.FK__CommonCon__Statu__5535A963" FromRole="CommonContract" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="DealType">
+          <Key>
+            <PropertyRef Name="DealTypeID" />
+          </Key>
+          <Property Name="DealTypeID" Type="Int32" Nullable="false" />
+          <Property Name="DealTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CommonContract" Relationship="Self.FK__CommonCon__DealT__534D60F1" FromRole="DealType" ToRole="CommonContract" />
+          <NavigationProperty Name="ServiceContract" Relationship="Self.FK__ServiceCo__DealT__4D94879B" FromRole="DealType" ToRole="ServiceContract" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="PropertyID" />
+          </Key>
+          <Property Name="PropertyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameOfProperty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="RealtyCharacteristic" Relationship="Self.FK__RealtyCha__Prope__440B1D61" FromRole="Property" ToRole="RealtyCharacteristic" />
+        </EntityType>
+        <EntityType Name="Realty">
+          <Key>
+            <PropertyRef Name="RealtyID" />
+          </Key>
+          <Property Name="RealtyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="House" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Flat" Type="Int32" />
+          <Property Name="Disctrict" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Rooms" Type="Int32" />
+          <Property Name="LivingArea" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="Int32" Nullable="false" />
+          <Property Name="Country" Type="Int32" Nullable="false" />
+          <Property Name="Floors" Type="Int32" />
+          <Property Name="Balcony" Type="Boolean" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="RealtyType" Type="Int32" />
+          <NavigationProperty Name="CommonContract" Relationship="Self.FK__CommonCon__Realt__5441852A" FromRole="Realty" ToRole="CommonContract" />
+          <NavigationProperty Name="TypeOfRealty" Relationship="Self.FK__Realty__RealtyTy__3E52440B" FromRole="Realty" ToRole="TypeOfRealty" />
+          <NavigationProperty Name="RealtyCharacteristic" Relationship="Self.FK__RealtyCha__Realt__4316F928" FromRole="Realty" ToRole="RealtyCharacteristic" />
+        </EntityType>
+        <EntityType Name="RealtyCharacteristic">
+          <Key>
+            <PropertyRef Name="RealtyCharacteristicID" />
+          </Key>
+          <Property Name="RealtyCharacteristicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Realty" Type="Int32" />
+          <Property Name="Property" Type="Int32" />
+          <NavigationProperty Name="Property1" Relationship="Self.FK__RealtyCha__Prope__440B1D61" FromRole="RealtyCharacteristic" ToRole="Property" />
+          <NavigationProperty Name="Realty1" Relationship="Self.FK__RealtyCha__Realt__4316F928" FromRole="RealtyCharacteristic" ToRole="Realty" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK__User__Role__398D8EEE" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ServiceContract">
+          <Key>
+            <PropertyRef Name="ServiceContractID" />
+          </Key>
+          <Property Name="ServiceContractID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Client" Type="Int32" />
+          <Property Name="Employee" Type="Int32" />
+          <Property Name="DealType" Type="Int32" />
+          <Property Name="ContractDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="Int32" />
+          <NavigationProperty Name="DealType1" Relationship="Self.FK__ServiceCo__DealT__4D94879B" FromRole="ServiceContract" ToRole="DealType" />
+          <NavigationProperty Name="User" Relationship="Self.FK__ServiceCo__Clien__4AB81AF0" FromRole="ServiceContract" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK__ServiceCo__Emplo__4BAC3F29" FromRole="ServiceContract" ToRole="User" />
+          <NavigationProperty Name="Status1" Relationship="Self.FK__ServiceCo__Statu__4E88ABD4" FromRole="ServiceContract" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="30" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CommonContract" Relationship="Self.FK__CommonCon__Statu__5535A963" FromRole="Status" ToRole="CommonContract" />
+          <NavigationProperty Name="ServiceContract" Relationship="Self.FK__ServiceCo__Statu__4E88ABD4" FromRole="Status" ToRole="ServiceContract" />
+        </EntityType>
+        <EntityType Name="TypeOfRealty">
+          <Key>
+            <PropertyRef Name="RealtyTypeID" />
+          </Key>
+          <Property Name="RealtyTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Realty" Relationship="Self.FK__Realty__RealtyTy__3E52440B" FromRole="TypeOfRealty" ToRole="Realty" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Middle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Role" Type="Int32" />
+          <NavigationProperty Name="Authorization" Relationship="Self.FK__Authoriza__UserI__5812160E" FromRole="User" ToRole="Authorization" />
+          <NavigationProperty Name="CommonContract" Relationship="Self.FK__CommonCon__Acqui__5165187F" FromRole="User" ToRole="CommonContract" />
+          <NavigationProperty Name="CommonContract1" Relationship="Self.FK__CommonCon__Selle__52593CB8" FromRole="User" ToRole="CommonContract" />
+          <NavigationProperty Name="Role1" Relationship="Self.FK__User__Role__398D8EEE" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="ServiceContract" Relationship="Self.FK__ServiceCo__Clien__4AB81AF0" FromRole="User" ToRole="ServiceContract" />
+          <NavigationProperty Name="ServiceContract1" Relationship="Self.FK__ServiceCo__Emplo__4BAC3F29" FromRole="User" ToRole="ServiceContract" />
+        </EntityType>
+        <Association Name="FK__Authoriza__UserI__5812160E">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Authorization" Type="Self.Authorization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Authorization">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommonCon__Acqui__5165187F">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="CommonContract" Type="Self.CommonContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CommonContract">
+              <PropertyRef Name="Acquirer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommonCon__DealT__534D60F1">
+          <End Role="DealType" Type="Self.DealType" Multiplicity="0..1" />
+          <End Role="CommonContract" Type="Self.CommonContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealType">
+              <PropertyRef Name="DealTypeID" />
+            </Principal>
+            <Dependent Role="CommonContract">
+              <PropertyRef Name="DealType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommonCon__Realt__5441852A">
+          <End Role="Realty" Type="Self.Realty" Multiplicity="0..1" />
+          <End Role="CommonContract" Type="Self.CommonContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realty">
+              <PropertyRef Name="RealtyID" />
+            </Principal>
+            <Dependent Role="CommonContract">
+              <PropertyRef Name="Realty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommonCon__Selle__52593CB8">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="CommonContract" Type="Self.CommonContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="CommonContract">
+              <PropertyRef Name="Seller" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CommonCon__Statu__5535A963">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="CommonContract" Type="Self.CommonContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="CommonContract">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__DealT__4D94879B">
+          <End Role="DealType" Type="Self.DealType" Multiplicity="0..1" />
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DealType">
+              <PropertyRef Name="DealTypeID" />
+            </Principal>
+            <Dependent Role="ServiceContract">
+              <PropertyRef Name="DealType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RealtyCha__Prope__440B1D61">
+          <End Role="Property" Type="Self.Property" Multiplicity="0..1" />
+          <End Role="RealtyCharacteristic" Type="Self.RealtyCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="PropertyID" />
+            </Principal>
+            <Dependent Role="RealtyCharacteristic">
+              <PropertyRef Name="Property" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Realty__RealtyTy__3E52440B">
+          <End Role="TypeOfRealty" Type="Self.TypeOfRealty" Multiplicity="0..1" />
+          <End Role="Realty" Type="Self.Realty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfRealty">
+              <PropertyRef Name="RealtyTypeID" />
+            </Principal>
+            <Dependent Role="Realty">
+              <PropertyRef Name="RealtyType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RealtyCha__Realt__4316F928">
+          <End Role="Realty" Type="Self.Realty" Multiplicity="0..1" />
+          <End Role="RealtyCharacteristic" Type="Self.RealtyCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Realty">
+              <PropertyRef Name="RealtyID" />
+            </Principal>
+            <Dependent Role="RealtyCharacteristic">
+              <PropertyRef Name="Realty" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__Role__398D8EEE">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__Clien__4AB81AF0">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ServiceContract">
+              <PropertyRef Name="Client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__Emplo__4BAC3F29">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="ServiceContract">
+              <PropertyRef Name="Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ServiceCo__Statu__4E88ABD4">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="ServiceContract" Type="Self.ServiceContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="ServiceContract">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EstateAgencyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Authorization" EntityType="Self.Authorization" />
+          <EntitySet Name="CommonContract" EntityType="Self.CommonContract" />
+          <EntitySet Name="DealType" EntityType="Self.DealType" />
+          <EntitySet Name="Property" EntityType="Self.Property" />
+          <EntitySet Name="Realty" EntityType="Self.Realty" />
+          <EntitySet Name="RealtyCharacteristic" EntityType="Self.RealtyCharacteristic" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="ServiceContract" EntityType="Self.ServiceContract" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="TypeOfRealty" EntityType="Self.TypeOfRealty" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK__Authoriza__UserI__5812160E" Association="Self.FK__Authoriza__UserI__5812160E">
+            <End Role="User" EntitySet="User" />
+            <End Role="Authorization" EntitySet="Authorization" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommonCon__Acqui__5165187F" Association="Self.FK__CommonCon__Acqui__5165187F">
+            <End Role="User" EntitySet="User" />
+            <End Role="CommonContract" EntitySet="CommonContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommonCon__DealT__534D60F1" Association="Self.FK__CommonCon__DealT__534D60F1">
+            <End Role="DealType" EntitySet="DealType" />
+            <End Role="CommonContract" EntitySet="CommonContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommonCon__Realt__5441852A" Association="Self.FK__CommonCon__Realt__5441852A">
+            <End Role="Realty" EntitySet="Realty" />
+            <End Role="CommonContract" EntitySet="CommonContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommonCon__Selle__52593CB8" Association="Self.FK__CommonCon__Selle__52593CB8">
+            <End Role="User" EntitySet="User" />
+            <End Role="CommonContract" EntitySet="CommonContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CommonCon__Statu__5535A963" Association="Self.FK__CommonCon__Statu__5535A963">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="CommonContract" EntitySet="CommonContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__DealT__4D94879B" Association="Self.FK__ServiceCo__DealT__4D94879B">
+            <End Role="DealType" EntitySet="DealType" />
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RealtyCha__Prope__440B1D61" Association="Self.FK__RealtyCha__Prope__440B1D61">
+            <End Role="Property" EntitySet="Property" />
+            <End Role="RealtyCharacteristic" EntitySet="RealtyCharacteristic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Realty__RealtyTy__3E52440B" Association="Self.FK__Realty__RealtyTy__3E52440B">
+            <End Role="TypeOfRealty" EntitySet="TypeOfRealty" />
+            <End Role="Realty" EntitySet="Realty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RealtyCha__Realt__4316F928" Association="Self.FK__RealtyCha__Realt__4316F928">
+            <End Role="Realty" EntitySet="Realty" />
+            <End Role="RealtyCharacteristic" EntitySet="RealtyCharacteristic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__Role__398D8EEE" Association="Self.FK__User__Role__398D8EEE">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__Clien__4AB81AF0" Association="Self.FK__ServiceCo__Clien__4AB81AF0">
+            <End Role="User" EntitySet="User" />
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__Emplo__4BAC3F29" Association="Self.FK__ServiceCo__Emplo__4BAC3F29">
+            <End Role="User" EntitySet="User" />
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceCo__Statu__4E88ABD4" Association="Self.FK__ServiceCo__Statu__4E88ABD4">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="ServiceContract" EntitySet="ServiceContract" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище EstateAgencyModelContainer" CdmEntityContainer="EstateAgencyEntities">
+          <EntitySetMapping Name="Authorization">
+            <EntityTypeMapping TypeName="EstateAgencyModel.Authorization">
+              <MappingFragment StoreEntitySet="Authorization">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommonContract">
+            <EntityTypeMapping TypeName="EstateAgencyModel.CommonContract">
+              <MappingFragment StoreEntitySet="CommonContract">
+                <ScalarProperty Name="CommonContractID" ColumnName="CommonContractID" />
+                <ScalarProperty Name="Acquirer" ColumnName="Acquirer" />
+                <ScalarProperty Name="Seller" ColumnName="Seller" />
+                <ScalarProperty Name="DealType" ColumnName="DealType" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Realty" ColumnName="Realty" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DealType">
+            <EntityTypeMapping TypeName="EstateAgencyModel.DealType">
+              <MappingFragment StoreEntitySet="DealType">
+                <ScalarProperty Name="DealTypeID" ColumnName="DealTypeID" />
+                <ScalarProperty Name="DealTypeName" ColumnName="DealTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Property">
+            <EntityTypeMapping TypeName="EstateAgencyModel.Property">
+              <MappingFragment StoreEntitySet="Property">
+                <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+                <ScalarProperty Name="NameOfProperty" ColumnName="NameOfProperty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Realty">
+            <EntityTypeMapping TypeName="EstateAgencyModel.Realty">
+              <MappingFragment StoreEntitySet="Realty">
+                <ScalarProperty Name="RealtyID" ColumnName="RealtyID" />
+                <ScalarProperty Name="House" ColumnName="House" />
+                <ScalarProperty Name="Flat" ColumnName="Flat" />
+                <ScalarProperty Name="Disctrict" ColumnName="Disctrict" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Rooms" ColumnName="Rooms" />
+                <ScalarProperty Name="LivingArea" ColumnName="LivingArea" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Floors" ColumnName="Floors" />
+                <ScalarProperty Name="Balcony" ColumnName="Balcony" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="RealtyType" ColumnName="RealtyType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RealtyCharacteristic">
+            <EntityTypeMapping TypeName="EstateAgencyModel.RealtyCharacteristic">
+              <MappingFragment StoreEntitySet="RealtyCharacteristic">
+                <ScalarProperty Name="RealtyCharacteristicID" ColumnName="RealtyCharacteristicID" />
+                <ScalarProperty Name="Realty" ColumnName="Realty" />
+                <ScalarProperty Name="Property" ColumnName="Property" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="EstateAgencyModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceContract">
+            <EntityTypeMapping TypeName="EstateAgencyModel.ServiceContract">
+              <MappingFragment StoreEntitySet="ServiceContract">
+                <ScalarProperty Name="ServiceContractID" ColumnName="ServiceContractID" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="DealType" ColumnName="DealType" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="EstateAgencyModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfRealty">
+            <EntityTypeMapping TypeName="EstateAgencyModel.TypeOfRealty">
+              <MappingFragment StoreEntitySet="TypeOfRealty">
+                <ScalarProperty Name="RealtyTypeID" ColumnName="RealtyTypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="EstateAgencyModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Middle" ColumnName="Middle" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,34 @@
+﻿<Page x:Class="EstateAgencyFramework.Pages.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EstateAgencyFramework.Pages" xmlns:viewmodels="clr-namespace:EstateAgencyFramework.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AdminPageViewModel}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AdminPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row ="1" LastChildFill="True">
+            <ListBox DockPanel.Dock="Left" SelectedValue="{Binding SelectedPageTitle}">
+                <ListBoxItem>AuthorizationPage</ListBoxItem>
+                <ListBoxItem>CommonContractPage</ListBoxItem>
+                <ListBoxItem>DealTypePage</ListBoxItem>
+                <ListBoxItem>PropertyPage</ListBoxItem>
+                <ListBoxItem>RealtyPage</ListBoxItem>
+                <ListBoxItem>RealtyCharacteristicPage</ListBoxItem>
+                <ListBoxItem>RolesPage</ListBoxItem>
+                <ListBoxItem>ServiceContractPage</ListBoxItem>
+                <ListBoxItem>StatusPage</ListBoxItem>
+                <ListBoxItem>TypeOfRealtyPage</ListBoxItem>
+                <ListBoxItem>UsersPage</ListBoxItem>
+            </ListBox>
+            <!--<Frame x:Name="Pages" DockPanel.Dock="Right" Source="{Binding SelectedPage}"/>-->
+            <Frame DockPanel.Dock="Right" Source="{Binding SelectedPage}"/>
+        </DockPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,35 @@
+﻿<Page x:Class="EstateAgencyFramework.Pages.RealtyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EstateAgencyFramework.Pages" xmlns:viewmodels="clr-namespace:EstateAgencyFramework.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:RealtyPageViewModel}"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RealtyPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0.15*"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="1" Content="SAVE" Command="{Binding SaveChangesToDB}" Width="100"/>
+        <DataGrid Grid.Row="0" DockPanel.Dock="Right" AutoGenerateColumns="False" ItemsSource="{Binding Realties, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="RealtyID" Binding="{Binding Path=RealtyID}"></DataGridTextColumn>
+                <DataGridTextColumn Header="House" Binding="{Binding Path=House}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Flat" Binding="{Binding Path=Flat}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Disctrict" Binding="{Binding Path=Disctrict}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Street" Binding="{Binding Path=Street}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Rooms" Binding="{Binding Path=Rooms}"></DataGridTextColumn>
+                <DataGridTextColumn Header="LivingArea" Binding="{Binding Path=LivingArea}"></DataGridTextColumn>
+                <DataGridTextColumn Header="City" Binding="{Binding Path=City}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Country" Binding="{Binding Path=Country}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Floors" Binding="{Binding Path=Floors}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Balcony" Binding="{Binding Path=Balcony}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Price" Binding="{Binding Path=Price}"></DataGridTextColumn>
+                <DataGridTextColumn Header="RealtyType" Binding="{Binding Path=RealtyType}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

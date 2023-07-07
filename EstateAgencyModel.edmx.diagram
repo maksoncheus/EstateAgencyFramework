@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="50254c6edc374e57a528fa7d04cfbf4c" Name="Diagram1">
+        <EntityTypeShape EntityType="EstateAgencyModel.Authorization" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.CommonContract" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.DealType" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.Property" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.Realty" Width="1.5" PointX="6" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.RealtyCharacteristic" Width="1.5" PointX="8.25" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.Role" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.ServiceContract" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.Status" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.TypeOfRealty" Width="1.5" PointX="3.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EstateAgencyModel.User" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="EstateAgencyModel.FK__Authoriza__UserI__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK__CommonCon__Acqui__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK__CommonCon__DealT__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK__CommonCon__Realt__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK__CommonCon__Selle__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK__CommonCon__Statu__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK__ServiceCo__DealT__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK__RealtyCha__Prope__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK__Realty__RealtyTy__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK__RealtyCha__Realt__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK__User__Role__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK__ServiceCo__Clien__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK__ServiceCo__Emplo__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="EstateAgencyModel.FK__ServiceCo__Statu__4E88ABD4" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
